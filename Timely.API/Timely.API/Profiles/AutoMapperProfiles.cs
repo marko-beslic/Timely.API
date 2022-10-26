@@ -10,6 +10,8 @@ namespace Timely.API.Profiles
         {
             CreateMap<DataModels.WorkSession, WorkSession>()
                 .ReverseMap();
+            CreateMap<AddWorkSessionRequest,DataModels.WorkSession>()
+                .AfterMap<AddWorkSessionRequestAfterMap>();
         }
     }
 }

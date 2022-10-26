@@ -26,5 +26,14 @@ namespace Timely.API.Controllers
 
             return Ok(mapper.Map<List<WorkSession>>(workSessions));
         }
+
+        [HttpPost]
+        [Route("[controller]/Add")]
+        public async Task<ActionResult> AddWorkSessionAsync([FromBody] AddWorkSessionRequest request)
+        {
+            var workSession = await workSessionRepository.AddWorkSession(mapper.Map<DataModels.WorkSession>(request));
+            return CreatedAtAction("GetWorkSession", new { workSessionId = workSession.Id },
+                mapper.Map<WorkSession>(workSession));
+        }
     }
 }

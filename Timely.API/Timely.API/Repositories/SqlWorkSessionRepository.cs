@@ -11,9 +11,16 @@ namespace Timely.API.Repositories
         {
             this.context = context;
         }
+
         public async Task<List<WorkSession>> GetWorkSessionsAsync()
         {
             return await context.WorkSession.ToListAsync();
+        }
+        public async Task<WorkSession> AddWorkSession(WorkSession request)
+        {
+            var workSession = await context.WorkSession.AddAsync(request);
+            await context.SaveChangesAsync();
+            return workSession.Entity;
         }
     }
 }
